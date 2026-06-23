@@ -243,8 +243,8 @@
 
 <div class="player" id="watch">
   <div class="frame">
-    <iframe src="https://www.youtube.com/embed/hB39K7tJNHo?start=1793&amp;autoplay=1&amp;mute=1&amp;playsinline=1&amp;controls=0&amp;modestbranding=1&amp;rel=0&amp;iv_load_policy=3&amp;disablekb=1" title="Recorded DJ Set" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-    <div class="frame-shield"></div>
+    <iframe id="nicholasPlayer" src="https://www.youtube.com/embed/hB39K7tJNHo?start=1793&amp;enablejsapi=1&amp;playsinline=1&amp;controls=0&amp;modestbranding=1&amp;rel=0&amp;iv_load_policy=3&amp;disablekb=1" title="Recorded DJ Set" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <div class="frame-shield" data-player="nicholas" style="cursor:pointer"></div>
   </div>
 </div>
 
@@ -312,19 +312,23 @@
   <div class="brand">CRAVIN' ADVENTURE STUDIOS</div>
 </footer>
 
+<script src="https://www.youtube.com/iframe_api"></script>
 <script>
-function pickType(el){
-  el.parentNode.querySelectorAll('.seg-btn').forEach(function(b){b.classList.remove('selected')});
-  el.classList.add('selected');
-}
-function lsSubmit(e){
-  e.preventDefault();
-  var f=e.target;
-  f.classList.add('sent');
-  f.querySelectorAll('input,textarea,button').forEach(function(el){el.disabled=true});
-  f.querySelector('.ls-thanks').scrollIntoView({behavior:'smooth',block:'center'});
-  return false;
-}
+  var nicholasPlayer;
+  function onYouTubeIframeAPIReady(){
+    nicholasPlayer = new YT.Player('nicholasPlayer');
+  }
+  document.addEventListener('click', function(e){
+    var shield = e.target.closest('.frame-shield[data-player="nicholas"]');
+    if(!shield || !nicholasPlayer || !nicholasPlayer.getPlayerState) return;
+    if(nicholasPlayer.getPlayerState() === 1){
+      nicholasPlayer.pauseVideo();
+    } else {
+      nicholasPlayer.unMute();
+      nicholasPlayer.setVolume(100);
+      nicholasPlayer.playVideo();
+    }
+  });
 </script>
 
 </body>
