@@ -143,6 +143,12 @@
   .jcard h3{font-size:21px;font-weight:700;margin-bottom:8px;min-height:54px}
   .jcard p{font-size:15px;color:var(--muted)}
   .jcard .ji{position:absolute;top:22px;right:22px;width:24px;height:24px;stroke:var(--electric);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;opacity:.75;filter:drop-shadow(0 0 6px rgba(108,92,231,.55))}
+  @keyframes progressOutline{0%,100%{border-color:var(--line)}22%,68%{border-color:var(--electric)}}
+  .jcard{animation:progressOutline 4.8s ease-in-out infinite}
+  .jcard:nth-child(2){animation-delay:.5s}
+  .jcard:nth-child(3){animation-delay:1s}
+  .jcard:nth-child(4){animation-delay:1.5s}
+  @media(prefers-reduced-motion:reduce){.jcard{animation:none}}
   .jcard.cta{border:1.5px solid var(--electric)}
   .arc{
     margin-top:60px;height:90px;position:relative;
